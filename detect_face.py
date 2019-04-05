@@ -6,6 +6,8 @@ import numpy as np
 import imutils
 import dlib
 import cv2
+import matplotlib.pyplot as plt
+
 
 class DetectFace:
 
@@ -31,9 +33,11 @@ class DetectFace:
         self. left_eye = []
         self.nose = []
         self.jaw = []
+        self.cheek = [[],[]] # index 0 : left, 1 : right
 
         # detect the face parts and set the variables
         self.detect_face_part()
+        self.cheek = self.detect_cheek()
 
 
     def detect_face_part(self):
@@ -70,17 +74,16 @@ class DetectFace:
                 (x, y, w, h) = cv2.boundingRect(np.array([shape[i:j]]))
                 roi = self.img[y:y + h, x:x + w]
                 roi = imutils.resize(roi, width=250, inter=cv2.INTER_CUBIC)
-
+                '''
                 # show the particular face part
                 cv2.imshow("ROI", roi)
                 cv2.imshow("Image", clone)
                 cv2.waitKey(0)
-
+                '''
             # visualize all facial landmarks with a transparent overlay
             output = face_utils.visualize_facial_landmarks(self.img, shape)
             cv2.imshow("Image", output)
             cv2.waitKey(0)
-
 
         # set the variables
         # Caution: this coordinates fits on the RESIZED image.
@@ -91,6 +94,8 @@ class DetectFace:
         self.left_eye = face_parts[4]
         self.nose = face_parts[5]
         self.jaw = face_parts[6]
+
+
 
     # parameter example : self.right_eye
     def extract_face_part(self, part):
@@ -104,13 +109,34 @@ class DetectFace:
         # extract right eye by applying polygon mask
         out = np.zeros_like(self.img)
         out[mask] = self.img[mask]
-        #cv2.imshow("Image2", out)
-        #cv2.waitKey(0)
+        '''
+        cv2.imshow("Image2", out)
+        cv2.waitKey(0)
+        '''
 
         # crop the image
         (x, y, w, h) = cv2.boundingRect(pts)
         extracted_part = out[y:y + h, x:x + w]
-        #cv2.imshow("Image2", extracted_part)
-        #cv2.waitKey(0)
-
+        '''
+        cv2.imshow("Image2", extracted_part)
+        cv2.waitKey(0)
+        '''
         return extracted_part
+
+
+    def detect_cheek(self):
+        cheek = [[],[]]
+
+        #rect is the face detected
+        shape = self.predictor(self.gray, self.rects[0])
+        shape = face_utils.shape_to_np(shape)
+
+        left = self.img[shape[29][1]:shape[33][1],
+                        shape[4][0]:shape[48][0]] #left cheek
+        right = self.img[shape[29][1]:shape[33][1],
+                        shape[54][0]:shape[12][0]] #right cheek
+
+        cheek[0] = left
+        cheek[1] = right
+
+        return cheek
