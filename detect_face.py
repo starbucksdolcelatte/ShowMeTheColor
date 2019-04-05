@@ -22,19 +22,32 @@ class DetectFace:
 
         # detect faces in the grayscale image
         self.rects = self.detector(self.gray, 1)
-        print(rects)
+
+        self.mouth = []
+        self.right_eyebrow = []
+        self. left_eyebrow = []
+        self.right_eye = []
+        self. left_eye = []
+        self.nose = []
+        self.jaw = []
+
+        # detect the face parts and save the value
+        self.detect_face_part()
+
 
     def detect_face_part(self):
         # loop over the face detections
         # i : name
         # 0 : mouth, 1 : right_eyebrow, 2 : left_eyebrow
         # 3 : right_eye, 4 : left_eye, 5 : nose, 6 : jaw
+        face_parts = [[],[],[],[],[],[],[]]
         for (i, rect) in enumerate(self.rects):
             # determine the facial landmarks for the face region, then
             # convert the landmark (x, y)-coordinates to a NumPy array
             shape = self.predictor(self.gray, rect)
             shape = face_utils.shape_to_np(shape)
 
+            idx = 0
             # loop over the face parts individually
             for (name, (i, j)) in face_utils.FACIAL_LANDMARKS_IDXS.items():
                 # clone the original image so we can draw on it, then
@@ -46,8 +59,11 @@ class DetectFace:
                 # specific face part
                 for (x, y) in shape[i:j]:
                     cv2.circle(clone, (x, y), 1, (0, 0, 255), -1)
-                print(name)
-                print(shape[i:j])
+                #print(name)
+                #print(shape[i:j])
+
+                face_parts[idx] = shape[i:j]
+                idx += 1
 
                 # extract the ROI of the face region as a separate image
                 (x, y, w, h) = cv2.boundingRect(np.array([shape[i:j]]))
@@ -64,12 +80,12 @@ class DetectFace:
             cv2.imshow("Image", output)
             cv2.waitKey(0)
 
-    def detect_right_eye(self):
-
-    def detect_left_eye(self):
-
-    def detect_mouth(self):
-
-    def detect_right_cheek(self):
-
-    def detect_left_cheek(self):
+        # set the variables
+        # Caution: this coordinates fits on the resized image.
+        self.mouth = face_parts[0]
+        self.right_eyebrow = face_parts[1]
+        self. left_eyebrow = face_parts[2]
+        self.right_eye = face_parts[3]
+        self. left_eye = face_parts[4]
+        self.nose = face_parts[5]
+        self.jaw = face_parts[6]
