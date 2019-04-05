@@ -23,6 +23,7 @@ class DetectFace:
         # detect faces in the grayscale image
         self.rects = self.detector(self.gray, 1)
 
+        # init face parts
         self.mouth = []
         self.right_eyebrow = []
         self. left_eyebrow = []
@@ -31,7 +32,7 @@ class DetectFace:
         self.nose = []
         self.jaw = []
 
-        # detect the face parts and save the value
+        # detect the face parts and set the variables
         self.detect_face_part()
 
 
@@ -80,12 +81,36 @@ class DetectFace:
             cv2.imshow("Image", output)
             cv2.waitKey(0)
 
+
         # set the variables
-        # Caution: this coordinates fits on the resized image.
+        # Caution: this coordinates fits on the RESIZED image.
         self.mouth = face_parts[0]
         self.right_eyebrow = face_parts[1]
-        self. left_eyebrow = face_parts[2]
+        self.left_eyebrow = face_parts[2]
         self.right_eye = face_parts[3]
-        self. left_eye = face_parts[4]
+        self.left_eye = face_parts[4]
         self.nose = face_parts[5]
         self.jaw = face_parts[6]
+
+    # parameter example : self.right_eye
+    def extract_face_part(self, part):
+        pts = part
+
+        # Create an mask
+        mask = np.zeros((self.img.shape[0], self.img.shape[1]))
+        cv2.fillConvexPoly(mask, pts, 1)
+        mask = mask.astype(np.bool)
+
+        # extract right eye by applying polygon mask
+        out = np.zeros_like(self.img)
+        out[mask] = self.img[mask]
+        #cv2.imshow("Image2", out)
+        #cv2.waitKey(0)
+
+        # crop the image
+        (x, y, w, h) = cv2.boundingRect(pts)
+        extracted_part = out[y:y + h, x:x + w]
+        #cv2.imshow("Image2", extracted_part)
+        #cv2.waitKey(0)
+
+        return extracted_part
