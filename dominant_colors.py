@@ -88,6 +88,7 @@ class DominantColors:
             g = colors[i][1]
             b = colors[i][2]
 
+            print(r,g,b)
             #using cv2.rectangle to plot colors
             cv2.rectangle(chart, (int(start), 0), (int(end), 50), (r,g,b), -1)
             start = end
