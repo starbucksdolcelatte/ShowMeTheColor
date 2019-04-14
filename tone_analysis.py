@@ -1,5 +1,5 @@
 from scipy.spatial import distance
-
+import copy
 # RGB based standard
 # list[0] = spring, [1] = summer, [2] = fall, [3] = winter
 label = ['spring', 'summer', 'fall', 'winter']
@@ -41,16 +41,18 @@ for i in range(4):
         pupil_dist[j][i] = distance.euclidean(pupil[i], pupil_lsg[j])
 # 거리가 짧은 순으로 정렬
 # skin
-sorted_skdist = skin_dist.copy()
-sorted_ppdist = pupil_dist.copy()
+sorted_skdist = copy.deepcopy(skin_dist)
+sorted_ppdist = copy.deepcopy(pupil_dist)
 
 for i in range(2):
-    sorted_skdist[i].sort(reverse = True)
+    sorted_skdist[i].sort()
 # pupil
 for i in range(4):
-    sorted_ppdist[i].sort(reverse = True)
-print(sorted_skdist)
-print(sorted_ppdist)
+    sorted_ppdist[i].sort()
+print(skin_dist[0])
+print(sorted_skdist[0])
+print(pupil_dist[0])
+print(sorted_ppdist[0])
 
 # 거리가 짧은 계절 순으로 출력
 # skin
