@@ -3,22 +3,26 @@ from detect_face import DetectFace
 from dominant_colors import DominantColors
 
 # Set paths
-image = "res/irene.jpg"
+image = "res/lees.jpg"
 predictor = "shape_predictor_68_face_landmarks.dat"
 
 # Create an DetectFace instance
 df = DetectFace(predictor, image)
-'''
+
 # Try: Extract mouth part
 mouth = df.extract_face_part(df.mouth)
 cv2.imshow("Mouth", mouth)
 cv2.waitKey(0)
-'''
+
 # Try: Extract right eye part
 r_eye = df.extract_face_part(df.right_eye)
 cv2.imshow("Right eye", r_eye)
 cv2.waitKey(0)
 
+# Try: Extract left eye part
+l_eye = df.extract_face_part(df.left_eye)
+cv2.imshow("Left eye", l_eye)
+cv2.waitKey(0)
 
 # Try : Extract cheek part
 cv2.imshow("Left cheek", df.cheek_img[0])
