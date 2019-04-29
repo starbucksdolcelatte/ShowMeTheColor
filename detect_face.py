@@ -33,13 +33,13 @@ class DetectFace:
         self. left_eye = []
         self.nose = []
         self.jaw = []
-        self.cheek = [[],[]] # index 0 : left, 1 : right
+        self.cheek_img = [[],[]] # index 0 : left, 1 : right
 
         # detect the face parts and set the variables
-        self.detect_face_part()
-        self.cheek = self.detect_cheek()
+        self.detect_face_part() # mouth, right_eyebrow, ..., jaw : np.array
+        self.cheek_img = self.detect_cheek() # image
 
-
+    # return type : np.array
     def detect_face_part(self):
         # loop over the face detections
         # i : name
@@ -64,8 +64,8 @@ class DetectFace:
                 # specific face part
                 for (x, y) in shape[i:j]:
                     cv2.circle(clone, (x, y), 1, (0, 0, 255), -1)
-                #print(name)
-                #print(shape[i:j])
+                print(name)
+                print(shape[i:j])
 
                 face_parts[idx] = shape[i:j]
                 idx += 1
@@ -98,6 +98,7 @@ class DetectFace:
 
 
     # parameter example : self.right_eye
+    # return type : image
     def extract_face_part(self, part):
         pts = part
 
@@ -124,17 +125,17 @@ class DetectFace:
         return extracted_part
 
 
+    # return type = image
     def detect_cheek(self):
         cheek = [[],[]]
 
-        #rect is the face detected
+        # rect is the face detected
         shape = self.predictor(self.gray, self.rects[0])
         shape = face_utils.shape_to_np(shape)
 
-        left = self.img[shape[29][1]:shape[33][1],
-                        shape[4][0]:shape[48][0]] #left cheek
-        right = self.img[shape[29][1]:shape[33][1],
-                        shape[54][0]:shape[12][0]] #right cheek
+        # Cheeks are detected by relative position to the face landmarks
+        left = self.img[shape[29][1]:shape[33][1], shape[4][0]:shape[48][0]] #left cheek
+        right = self.img[shape[29][1]:shape[33][1], shape[54][0]:shape[12][0]] #right cheek
 
         cheek[0] = left
         cheek[1] = right
