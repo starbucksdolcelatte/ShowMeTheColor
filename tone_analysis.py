@@ -1,11 +1,14 @@
 from scipy.spatial import distance
 import copy
-# RGB based standard
+from get_std_from_xls import ListFromExcel
+
+converter = ListFromExcel('res/tone_color_standard.xlsx')
+# STANDARD(RGB based)
 # list[0] = spring, [1] = summer, [2] = fall, [3] = winter
 label = ['spring', 'summer', 'fall', 'winter']
-skin = [[197, 159, 140], [200, 164, 150], [195, 156, 138], [204, 168, 156]]
-pupil = [[157, 92, 18], [145, 112, 28], [134, 96, 3], [136, 101, 10]]
-hair = [[152, 103, 47], [95, 82, 81], [121, 87, 66], [85, 64, 67]]
+skin_rgb = converter.get_rgb(converter.skin)
+pupil_rgb = converter.get_rgb(converter.pupil)
+hair_rgb = converter.get_rgb(converter.hair)
 
 # 이성경(res/lees.jpg) dominant colors by order of histogram
 skin_lsg = [[222.5, 201.4, 188.9], [227.2, 209.5, 203.3]] # left cheek

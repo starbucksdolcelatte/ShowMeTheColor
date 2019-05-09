@@ -28,9 +28,9 @@ class DetectFace:
         # init face parts
         self.mouth = []
         self.right_eyebrow = []
-        self. left_eyebrow = []
+        self.left_eyebrow = []
         self.right_eye = []
-        self. left_eye = []
+        self.left_eye = []
         self.nose = []
         self.jaw = []
         self.cheek_img = [[],[]] # index 0 : left, 1 : right
@@ -107,22 +107,48 @@ class DetectFace:
         cv2.fillConvexPoly(mask, pts, 1)
         mask = mask.astype(np.bool)
 
+        print(mask)
+
+        # Mask For background
+        inversed_mask = np.logical_not(mask)
+        print(inversed_mask)
+
+
+        # Create a blank black image
+        blue = np.zeros_like(self.img)
+        # Fill image with blue color(set each pixel to blue)
+        blue[:] = [255, 0, 0]
+        # extract background by applying inversed_mask
+        print(inversed_mask.shape)
+        print(blue.shape)
+        print(type(self.img))
+        print(type(blue))
+        print(mask.shape)
+        print(self.img.shape)
+
+        # extract right eye by applying polygon mask
+        out2 = np.zeros_like(self.img)
+        out2[inversed_mask] = blue[inversed_mask]
+        cv2.imshow("out2", out2)
+        cv2.waitKey(0)
+
         # extract right eye by applying polygon mask
         out = np.zeros_like(self.img)
         out[mask] = self.img[mask]
-        '''
-        cv2.imshow("Image2", out)
+        #out = out[mask] + blue
+
+        cv2.imshow("out", out)
         cv2.waitKey(0)
-        '''
 
         # crop the image
         (x, y, w, h) = cv2.boundingRect(pts)
-        extracted_part = out[y:y + h, x:x + w]
-        '''
-        cv2.imshow("Image2", extracted_part)
+        crop1 = out[y:y + h, x:x + w]
+        crop2 = out2[y:y + h, x:x + w]
+        crop = cv2.add(crop1,crop2)
+        cv2.imshow("Image2", crop)
         cv2.waitKey(0)
-        '''
-        return extracted_part
+
+        return crop
 
 
     # return type = image
