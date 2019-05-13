@@ -1,6 +1,7 @@
 from scipy.spatial import distance
 import copy
 from get_std_from_xls import ListFromExcel
+import math
 
 converter = ListFromExcel('res/tone_color_standard.xlsx')
 # STANDARD(RGB based)
@@ -17,6 +18,51 @@ pupil_lsg = [[159.8, 115.8, 61.7], [186.5, 156.1, 129.0],
 
 skin_lab = [[87.39, -2.18, 16.21],[84.48, 0.75, 14.23],[80.58, -0.07, 25.46],[91.47, -0.73, 9.96]]
 skin_lsg_lab =  [[73.73, 19.20, 7.79],[70.94, 19.32, 8.28]] #left cheek
+
+def dist(x, c, a):
+    '''
+    x와 c 사이의 거리를 구함.
+    x : 인체 질의 색상(list : [skin[R,G,B], hair[R,G,B], eye[R,G,B]])
+    c : 기준 색상(list : [skin[R,G,B], hair[R,G,B], eye[R,G,B]])
+    a : 인체 부위별 가중치(list : [skin, hair, eye])
+    '''
+    distance = 0
+    for body in range(3): #body = 0: skin, 1: hair, 2: eye
+        diff = list(map(operator.sub, x[body], c[body]))
+        distance += a[body] * sum(i*i for i in diff)
+    return math.sqrt(distance)
+
+def minDist(x, Ct, a):
+    '''
+    x와 계절 t에 대한 c집합 Ct 중 가장 짧은 거리를 구함.
+    x : 인체 질의 색상(list : [skin[R,G,B], hair[R,G,B], eye[R,G,B]])
+    c : 기준 색상(list : [skin[R,G,B], hair[R,G,B], eye[R,G,B]])
+    C : 전체 계절에 대한 c들의 집합 list
+    Ct : 계절 t에 대한 c들의 집합 list
+    a : 인체 부위별 가중치(list : [skin, hair, eye])
+    '''
+    distance = []
+    for c in Ct:
+        distance.append(dist(x, c, a))
+    return min(distance)
+
+def probability(x, t, C, a):
+    '''
+    x의 특정 계절유형 t에 대한 소속도를 구함.
+    x : 인체 질의 색상(list : [skin[R,G,B], hair[R,G,B], eye[R,G,B]])
+    t : 특정 계절(int : 0: spring, 1: summer, 2: fall, 3: winter)
+    c : 기준 색상(list : [skin[R,G,B], hair[R,G,B], eye[R,G,B]])
+    C : 전체 계절에 대한 c들의 집합 list
+    a : 인체 부위별 가중치(list : [skin, hair, eye])
+    '''
+    #분모
+    denominator = 1/(sum(minDist(x, C[i], a) for i in range(4)))
+    #분자
+    numerator = 1/(minDist(x, C[t], a))
+
+    return 100*(numerator/denominator)
+
+
 '''
 for i in range(4):
     print(f'skin distance from {label[i]}')
