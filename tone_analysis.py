@@ -2,6 +2,7 @@ from scipy.spatial import distance
 import copy
 from get_std_from_xls import ListFromExcel
 import math
+import operator
 
 converter = ListFromExcel('res/tone_color_standard.xlsx')
 # STANDARD(RGB based)
@@ -10,14 +11,17 @@ label = ['spring', 'summer', 'fall', 'winter']
 skin_rgb = converter.get_rgb(converter.skin)
 pupil_rgb = converter.get_rgb(converter.pupil)
 hair_rgb = converter.get_rgb(converter.hair)
+C = converter.convert_list(skin_rgb[0:2], hair_rgb, pupil_rgb)
 
 # 이성경(res/lees.jpg) dominant colors by order of histogram
 skin_lsg = [[222.5, 201.4, 188.9], [227.2, 209.5, 203.3]] # left cheek
 pupil_lsg = [[159.8, 115.8, 61.7], [186.5, 156.1, 129.0],
              [126.0, 77.5, 42.8], [88.1, 41.1, 20.9]] # right eye
+hair_lsg = [[138.6, 98.4, 55.0],[161.8, 121.4, 72.0]]
 
 skin_lab = [[87.39, -2.18, 16.21],[84.48, 0.75, 14.23],[80.58, -0.07, 25.46],[91.47, -0.73, 9.96]]
 skin_lsg_lab =  [[73.73, 19.20, 7.79],[70.94, 19.32, 8.28]] #left cheek
+
 
 def dist(x, c, a):
     '''
@@ -60,7 +64,7 @@ def probability(x, t, C, a):
     #분자
     numerator = 1/(minDist(x, C[t], a))
 
-    return 100*(numerator/denominator)
+    return (numerator/denominator)
 
 
 '''
@@ -152,3 +156,20 @@ for i in range(2):
     for season in range(4):
         print(f'{season+1}위:', label[skin_dist_lab[i].index(sorted_skdist_lab[i][season])])
 print('\n')
+
+
+# skin, hair, eye 순서
+lee_seong_kyoung = [[222.5, 201.4, 188.9], [138.6, 98.4, 55.0], [159.8, 115.8, 61.7]]
+
+print("******************")
+a = [30, 20, 10]
+spring = 0
+summer = 1
+fall = 2
+winter = 3
+print("이성경")
+print("봄   : ", format(probability(lee_seong_kyoung, spring, C, a),".2f"), "%")
+print("여름 : ", format(probability(lee_seong_kyoung, summer, C, a),".2f"), "%")
+print("가을 : ", format(probability(lee_seong_kyoung, fall, C, a),".2f"), "%")
+print("겨울 : ", format(probability(lee_seong_kyoung, winter, C, a),".2f"), "%")
+print("******************")
