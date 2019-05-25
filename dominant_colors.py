@@ -98,3 +98,4 @@ class DominantColors:
         plt.axis("off")
         plt.imshow(chart)
         plt.show()
+        print(" ")

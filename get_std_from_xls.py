@@ -83,6 +83,4 @@ class ListFromExcel:
                 temp.append([skin_list[i][s], hair_list[i][s], eye_list[i][s]])
             ret.append(temp)
             temp = []
-        for x in ret:
-            print(x)
         return ret

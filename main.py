@@ -6,7 +6,7 @@ from getjson import GetJson
 import imutils
 from colormath.color_objects import LabColor, sRGBColor
 from colormath.color_conversions import convert_color
-
+'''
 # 이성경(res/lees.jpg) dominant colors by order of histogram
 # skin, hair, eye 순서
 lsk_rgb = [[222.5, 201.4, 188.9], [138.6, 98.4, 55.0], [159.8, 115.8, 61.7]]
@@ -59,29 +59,34 @@ r_cheek = df.cheek_img[1]
 clusters = 5
 lc_dc = DominantColors(l_cheek, clusters)
 lc_colors = lc_dc.dominantColors()
-print(lc_colors)
+print("left cheek")
 lc_dc.plotHistogram()
 
 # Create an DominantColors instance on left cheek image
 rc_dc = DominantColors(r_cheek, clusters)
 rc_colors = rc_dc.dominantColors()
-print(rc_colors)
+print("right cheek")
 rc_dc.plotHistogram()
 
-# Try : Dominant color on right_eye
+# Try : Dominant color on left_eye
 clusters = 6
+dc_le = DominantColors(l_eye, clusters)
+colors = dc_le.dominantColors()
+print("left eye")
+dc_le.plotHistogram()
+
+# Try : Dominant color on right_eye
 dc_re = DominantColors(r_eye, clusters)
 colors = dc_re.dominantColors()
-print(colors)
+print("right eye")
 dc_re.plotHistogram()
+
 
 # hair
 hair_img = "res/lees_hair.jpg"
 img = cv2.imread(hair_img)
 resized_img = imutils.resize(img, width = 100)
-clusters = 6
-dc_re = DominantColors(resized_img, clusters)
-colors = dc_re.dominantColors()
-print(colors)
-dc_re.plotHistogram()
-'''
+clusters = 5
+dc_hair = DominantColors(resized_img, clusters)
+colors = dc_hair.dominantColors()
+dc_hair.plotHistogram()

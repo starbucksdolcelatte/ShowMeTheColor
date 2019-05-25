@@ -119,34 +119,28 @@ class DetectFace:
         # Fill image with blue color(set each pixel to blue)
         blue[:] = [255, 0, 0]
         # extract background by applying inversed_mask
-        print(inversed_mask.shape)
-        print(blue.shape)
-        print(type(self.img))
-        print(type(blue))
-        print(mask.shape)
-        print(self.img.shape)
-
+        
         # extract right eye by applying polygon mask
         out2 = np.zeros_like(self.img)
         out2[inversed_mask] = blue[inversed_mask]
-        cv2.imshow("out2", out2)
-        cv2.waitKey(0)
+        #cv2.imshow("out2", out2)
+        #cv2.waitKey(0)
 
         # extract right eye by applying polygon mask
         out = np.zeros_like(self.img)
         out[mask] = self.img[mask]
         #out = out[mask] + blue
 
-        cv2.imshow("out", out)
-        cv2.waitKey(0)
+        #cv2.imshow("out", out)
+        #cv2.waitKey(0)
 
         # crop the image
         (x, y, w, h) = cv2.boundingRect(pts)
         crop1 = out[y:y + h, x:x + w]
         crop2 = out2[y:y + h, x:x + w]
         crop = cv2.add(crop1,crop2)
-        cv2.imshow("Image2", crop)
-        cv2.waitKey(0)
+        #cv2.imshow("Image2", crop)
+        #cv2.waitKey(0)
 
         return crop
 
