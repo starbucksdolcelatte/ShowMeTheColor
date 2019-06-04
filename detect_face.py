@@ -64,8 +64,8 @@ class DetectFace:
                 # specific face part
                 for (x, y) in shape[i:j]:
                     cv2.circle(clone, (x, y), 1, (0, 0, 255), -1)
-                print(name)
-                print(shape[i:j])
+                #print(name)
+                #print(shape[i:j])
 
                 face_parts[idx] = shape[i:j]
                 idx += 1
@@ -82,8 +82,8 @@ class DetectFace:
                 '''
             # visualize all facial landmarks with a transparent overlay
             output = face_utils.visualize_facial_landmarks(self.img, shape)
-            cv2.imshow("Image", output)
-            cv2.waitKey(0)
+            #cv2.imshow("Image", output)
+            #cv2.waitKey(0)
 
         # set the variables
         # Caution: this coordinates fits on the RESIZED image.
@@ -107,11 +107,11 @@ class DetectFace:
         cv2.fillConvexPoly(mask, pts, 1)
         mask = mask.astype(np.bool)
 
-        print(mask)
+        #print(mask)
 
         # Mask For background
         inversed_mask = np.logical_not(mask)
-        print(inversed_mask)
+        #print(inversed_mask)
 
 
         # Create a blank black image
@@ -119,7 +119,7 @@ class DetectFace:
         # Fill image with blue color(set each pixel to blue)
         blue[:] = [255, 0, 0]
         # extract background by applying inversed_mask
-        
+
         # extract right eye by applying polygon mask
         out2 = np.zeros_like(self.img)
         out2[inversed_mask] = blue[inversed_mask]
@@ -159,5 +159,10 @@ class DetectFace:
 
         cheek[0] = left
         cheek[1] = right
+
+        # show the particular face part
+        #cv2.imshow("left", left)
+        #cv2.imshow("right", right)
+        #cv2.waitKey(0)
 
         return cheek

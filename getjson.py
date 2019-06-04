@@ -25,11 +25,8 @@ class GetJson:
         i = 0
         j = 0
         for season in json_data:
-            print(season)
             for std in json_data[season]:
-                print(std)
                 for body_part in json_data[season][std]:
-                    print(body_part)
                     result_list[i][j].append(json_data[season][std][body_part])
                 j += 1
             i += 1

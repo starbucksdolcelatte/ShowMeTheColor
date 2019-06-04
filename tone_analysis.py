@@ -40,8 +40,8 @@ class ToneAnalysis:
         C : 전체 계절에 대한 c들의 집합 list
         a : 인체 부위별 가중치(list : [skin, hair, eye])
         '''
-        print(t)
-        print(C[t])
+        #print(t)
+        #print(C[t])
         #분모
         denominator = sum((1/self.minDist(x, C[i], a)) for i in range(4))
         #분자
@@ -49,7 +49,11 @@ class ToneAnalysis:
         return (numerator/denominator)*100
 
     def is_warm(self, lab):
-        if (lab[1] >= lab[2]):
-            return 0 #cool
-        else:
-            return 1 #warm
+        tone = [0,0] # warm, cool
+        for i in range(3):
+            if (lab[i][1] >= lab[i][2]):
+                tone[1] = 3-i #cool
+            else:
+                tone[0] = 3-i #warm
+        if(tone[0]>=tone[1]):
+            return 1

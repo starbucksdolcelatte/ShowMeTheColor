@@ -16,28 +16,47 @@ for color in lsk_rgb:
     lab = convert_color(rgb, LabColor, through_rgb_type=sRGBColor)
     lsk_lab.append([lab.lab_l, lab.lab_a, lab.lab_b])
 
+# 봄웜1(res/spring_1_0.png) dominant colors by order of histogram
+# skin, hair, eye 순서
+sw1_rgb = [[201.58, 158.42, 142.44], [47.38, 37.76, 35.96], [44.92, 39.05, 41.00]]
+sw1_lab = []
+for color in sw1_rgb:
+    rgb = sRGBColor(color[0], color[1], color[2], is_upscaled=True)
+    lab = convert_color(rgb, LabColor, through_rgb_type=sRGBColor)
+    sw1_lab.append([lab.lab_l, lab.lab_a, lab.lab_b])
+
+
+# 채연(res/chaeyeon.jpg) dominant colors by order of histogram
+# skin, hair, eye 순서
+cy_rgb = [[239.74, 211.85, 196.76], [16.02, 23.75, 39.83], [51.38, 35.24, 40.31]]
+cy_lab = []
+for color in cy_rgb:
+    rgb = sRGBColor(color[0], color[1], color[2], is_upscaled=True)
+    lab = convert_color(rgb, LabColor, through_rgb_type=sRGBColor)
+    cy_lab.append([lab.lab_l, lab.lab_a, lab.lab_b])
+
 getJson = GetJson()
 C = getJson.get_standard('res/standard.json')
-print(C)
+
 
 tone_analysis = ToneAnalysis()
 
 print("******************")
-a = [30, 20, 10] # 가중치
+a = [400, 300, 10] # 가중치
 spring = 0
 summer = 1
 fall = 2
 winter = 3
 result_prob = []
 for season in range(4):
-    result_prob.append(format(tone_analysis.probability(lsk_lab, season, C, a),".2f"))
-print("이성경")
+    result_prob.append(format(tone_analysis.probability(cy_rgb, season, C, a),".2f"))
+print("결과")
 print("봄   : ", result_prob[spring], "%")
 print("여름 : ", result_prob[summer], "%")
 print("가을 : ", result_prob[fall], "%")
 print("겨울 : ", result_prob[winter], "%")
 print("******************")
-if(tone_analysis.is_warm(lsk_lab)):
+if(tone_analysis.is_warm(cy_rgb)):
     if(result_prob[spring] >= result_prob[fall]):
         print("봄 웜톤")
     else:
@@ -50,7 +69,7 @@ else:
 
 '''
 # Set paths
-image = "res/lees.jpg"
+image = "res/chaeyeon.jpg"
 predictor = "shape_predictor_68_face_landmarks.dat"
 
 # Create an DetectFace instance
@@ -97,7 +116,7 @@ dc_re.plotHistogram()
 
 
 # hair
-hair_img = "res/lees_hair.jpg"
+hair_img = "res/chaeyeon_hair.jpg"
 img = cv2.imread(hair_img)
 resized_img = imutils.resize(img, width = 100)
 clusters = 6

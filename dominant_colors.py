@@ -3,6 +3,8 @@ import numpy as np
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
+from skimage import io
+
 
 class DominantColors:
 
@@ -88,14 +90,19 @@ class DominantColors:
             g = colors[i][1]
             b = colors[i][2]
 
-            print(r,g,b)
+            #print(r,g,b)
             #using cv2.rectangle to plot colors
             cv2.rectangle(chart, (int(start), 0), (int(end), 50), (r,g,b), -1)
             start = end
 
         #display chart
-        plt.figure()
-        plt.axis("off")
-        plt.imshow(chart)
-        plt.show()
-        print(" ")
+        #plt.figure()
+        #plt.axis("off")
+        #plt.imshow(chart)
+        #plt.show()
+        for i in range(self.CLUSTERS):
+            colors[i][0] = int(colors[i][0])
+            colors[i][1] = int(colors[i][1])
+            colors[i][2] = int(colors[i][2])
+
+        return colors
