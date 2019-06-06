@@ -200,3 +200,40 @@ for label, pix in zip(LABELS, kmeans_s0b):
     print(pix[0], pix[1], pix[2])
     ax.scatter(pix[0], pix[1], pix[2], color = COLORS_wc[label])
 pyplot.show()
+
+
+######################
+rgb_for_kmeans = [[[skin_R_vals[i][j], skin_G_vals[i][j], skin_B_vals[i][j]] for j in range(75)] for i in range(4)]
+kmeans = KMeans(n_clusters = 6)
+kmeans_temp = []
+for i in range(4):
+    print(seasons[i])
+    kmeans.fit(rgb_for_kmeans[i])
+    #the cluster centers are our dominant colors.
+    rgb_COLORS = kmeans.cluster_centers_
+    #save labels
+    rgb_LABELS = kmeans.labels_
+    kmeans_temp.append(rgb_COLORS)
+    print(rgb_COLORS)
+
+kmeans_rgb = [[[k[j][0] for j in range(6)], [0 for _ in range(6)], [k[j][2] for j in range(6)]] for k in kmeans_temp]
+
+fig = pyplot.figure()
+ax = Axes3D(fig)
+ax.set_xlabel('$RGB_R$', fontsize=20)
+ax.set_ylabel('$RGB_G$', fontsize=20)
+ax.set_zlabel('$RGB_B$', fontsize=20)
+for label, pix in zip(LABELS, kmeans_rgb):
+    print(pix[0], pix[1], pix[2])
+    ax.scatter(pix[0], pix[1], pix[2], color = COLORS[label])
+pyplot.show()
+
+fig = pyplot.figure()
+ax = Axes3D(fig)
+ax.set_xlabel('$RGB_R$', fontsize=20)
+ax.set_ylabel('$RGB_G$', fontsize=20)
+ax.set_zlabel('$RGB_B$', fontsize=20)
+for label, pix in zip(LABELS, kmeans_rgb):
+    print(pix[0], pix[1], pix[2])
+    ax.scatter(pix[0], pix[1], pix[2], color = COLORS_wc[label])
+pyplot.show()
