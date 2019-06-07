@@ -105,4 +105,8 @@ class DominantColors:
             colors[i][1] = int(colors[i][1])
             colors[i][2] = int(colors[i][2])
 
+        # Blue mask 제거
+        fil = [colors[i][2] < 250 and colors[i][0] > 10 for i in range(self.CLUSTERS)]
+        colors = list(compress(colors, fil))
+
         return colors
