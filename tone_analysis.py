@@ -65,15 +65,69 @@ class ToneAnalysis:
         body_part = ['skin', 'eyebrow', 'eye']
         for i in range(3):
             warm_dist += abs(lab_b[i] - warm_b_std[i]) * a[i]
-            print(body_part[i],"의 warm 기준값과의 거리")
-            print(abs(lab_b[i] - warm_b_std[i]))
+            #print(body_part[i],"의 warm 기준값과의 거리")
+            #print(abs(lab_b[i] - warm_b_std[i]))
             cool_dist += abs(lab_b[i] - cool_b_std[i]) * a[i]
-            print(body_part[i],"의 cool 기준값과의 거리")
-            print(abs(lab_b[i] - cool_b_std[i]))
-
-        print("")
+            #print(body_part[i],"의 cool 기준값과의 거리")
+            #print(abs(lab_b[i] - cool_b_std[i]))
 
         if(warm_dist <= cool_dist):
             return 1 #warm
         else:
             return 0 #cool
+
+    def is_spr(self, hsv_s, a):
+        '''
+        파라미터 hsv_s = [skin_s, hair_s, eye_s]
+        a = 가중치 [skin, hair, eye]
+        질의색상 hsv_s값에서 spring의 hsv_s, fall의 hsv_s값 간의 거리를
+        각각 계산하여 spring이 가까우면 1, 반대 경우 0 리턴
+        '''
+        #skin, hair, eye
+        spr_s_std = [17.21, 42.47, 49.02]
+        fal_s_std = [32.24, 38.59, 29.73]
+
+        spr_dist = 0
+        fal_dist = 0
+
+        body_part = ['skin', 'eyebrow', 'eye']
+        for i in range(3):
+            spr_dist += abs(hsv_s[i] - spr_s_std[i]) * a[i]
+            #print(body_part[i],"의 spring 기준값과의 거리")
+            #print(abs(hsv_s[i] - spr_s_std[i]))
+            fal_dist += abs(hsv_s[i] - fal_s_std[i]) * a[i]
+            #print(body_part[i],"의 fall 기준값과의 거리")
+            #print(abs(hsv_s[i] - fal_s_std[i]))
+
+        if(spr_dist <= fal_dist):
+            return 1 #spring
+        else:
+            return 0 #fall
+
+    def is_smr(self, hsv_s, a):
+        '''
+        파라미터 hsv_s = [skin_s, hair_s, eye_s]
+        a = 가중치 [skin, hair, eye]
+        질의색상 hsv_s값에서 summer의 hsv_s, winter의 hsv_s값 간의 거리를
+        각각 계산하여 summer가 가까우면 1, 반대 경우 0 리턴
+        '''
+        #skin, hair, eye
+        smr_s_std = [9.5, 15.54, 24.39]
+        wnt_s_std = [14.06, 27.43, 38.02]
+
+        smr_dist = 0
+        wnt_dist = 0
+
+        body_part = ['skin', 'eyebrow', 'eye']
+        for i in range(3):
+            smr_dist += abs(hsv_s[i] - smr_s_std[i]) * a[i]
+            #print(body_part[i],"의 summer 기준값과의 거리")
+            #print(abs(hsv_s[i] - smr_s_std[i]))
+            wnt_dist += abs(hsv_s[i] - wnt_s_std[i]) * a[i]
+            #print(body_part[i],"의 winter 기준값과의 거리")
+            #print(abs(hsv_s[i] - wnt_s_std[i]))
+
+        if(smr_dist <= wnt_dist):
+            return 1 #summer
+        else:
+            return 0 #winter

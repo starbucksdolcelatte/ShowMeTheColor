@@ -62,14 +62,6 @@ for j in range(4):
         m_dc.dominantColors()
         m_colors = m_dc.plotHistogram()
 
-        # skin, hair, eye, mouth 순서
-        fil = [leb_colors[i][2] < 250 and leb_colors[i][0] > 10 for i in range(clusters)]
-        leb_colors = list(compress(leb_colors, fil))
-        fil = [le_colors[i][2] < 250 and le_colors[i][0] > 10 for i in range(clusters)]
-        le_colors = list(compress(le_colors, fil))
-        fil = [m_colors[i][2] < 250 and m_colors[i][0] > 10 for i in range(clusters)]
-        m_colors = list(compress(m_colors, fil))
-
         cy_rgb = [lc_colors[0:3], leb_colors[0:3], le_colors[0:3], m_colors[0:3]]
         cy_lab = []
 

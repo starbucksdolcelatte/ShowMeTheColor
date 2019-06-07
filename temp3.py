@@ -1,6 +1,5 @@
 from matplotlib import pyplot
 from mpl_toolkits.mplot3d import Axes3D
-import random
 from colormath.color_objects import LabColor, sRGBColor, HSVColor
 from colormath.color_conversions import convert_color
 from sklearn.cluster import KMeans
