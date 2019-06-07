@@ -48,12 +48,32 @@ class ToneAnalysis:
         numerator = 1/(self.minDist(x, C[t], a))
         return (numerator/denominator)*100
 
-    def is_warm(self, lab):
-        tone = [0,0] # warm, cool
+    def is_warm(self, lab_b, a):
+        '''
+        파라미터 lab_b = [skin_b, hair_b, eye_b]
+        a = 가중치 [skin, hair, eye]
+        질의색상 lab_b값에서 warm의 lab_b, cool의 lab_b값 간의 거리를
+        각각 계산하여 warm이 가까우면 1, 반대 경우 0 리턴
+        '''
+        #skin, hair, eye
+        warm_b_std = [12.16, 16.315, 7.94]
+        cool_b_std = [2.312, 3.278, 2.675]
+
+        warm_dist = 0
+        cool_dist = 0
+
+        body_part = ['skin', 'eyebrow', 'eye']
         for i in range(3):
-            if (lab[i][1] >= lab[i][2]):
-                tone[1] = 3-i #cool
-            else:
-                tone[0] = 3-i #warm
-        if(tone[0]>=tone[1]):
-            return 1
+            warm_dist += abs(lab_b[i] - warm_b_std[i]) * a[i]
+            print(body_part[i],"의 warm 기준값과의 거리")
+            print(abs(lab_b[i] - warm_b_std[i]))
+            cool_dist += abs(lab_b[i] - cool_b_std[i]) * a[i]
+            print(body_part[i],"의 cool 기준값과의 거리")
+            print(abs(lab_b[i] - cool_b_std[i]))
+
+        print("")
+
+        if(warm_dist <= cool_dist):
+            return 1 #warm
+        else:
+            return 0 #cool
