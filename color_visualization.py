@@ -64,7 +64,7 @@ palette_mouth_smr = [[palette_mouth[1][i*3], palette_mouth[1][i*3+1], palette_mo
 palette_mouth_fal = [[palette_mouth[2][i*3], palette_mouth[2][i*3+1], palette_mouth[1][i*3+2]] for i in range(25)]
 palette_mouth_wnt = [[palette_mouth[3][i*3], palette_mouth[3][i*3+1], palette_mouth[3][i*3+2]] for i in range(25)]
 
-
+'''
 print(palette_skin_spr)
 plt.imshow(palette_skin_spr)
 plt.xticks([]) # x축 눈금
@@ -148,4 +148,12 @@ plt.show()
 plt.imshow(palette_mouth_wnt)
 plt.xticks([]) # x축 눈금
 plt.yticks([]) # y축 눈금
+plt.show()
+'''
+
+
+fig = plt.figure()
+ax = Axes3D(fig)
+for label, pix in zip(self.LABELS, self.IMAGE):
+    ax.scatter(pix[0], pix[1], pix[2], color = self.rgb_to_hex(self.COLORS[label]))
 plt.show()
