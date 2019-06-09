@@ -6,6 +6,7 @@ from mpl_toolkits.mplot3d import Axes3D
 from skimage import io
 from itertools import compress  
 
+
 class DominantColors:
 
     CLUSTERS = None
@@ -81,8 +82,16 @@ class DominantColors:
         chart = np.zeros((50, 500, 3), np.uint8)
         start = 0
 
-        #creating color rectangles
         for i in range(self.CLUSTERS):
+            colors[i][0] = int(colors[i][0])
+            colors[i][1] = int(colors[i][1])
+            colors[i][2] = int(colors[i][2])
+
+        # Blue mask 제거
+        fil = [colors[i][2] < 250 and colors[i][0] > 10 for i in range(self.CLUSTERS)]
+        colors = list(compress(colors, fil))
+        #creating color rectangles
+        for i in range(len(colors)):
             end = start + hist[i] * 500
 
             #getting rgb values
@@ -96,17 +105,9 @@ class DominantColors:
             start = end
 
         #display chart
-        #plt.figure()
-        #plt.axis("off")
-        #plt.imshow(chart)
-        #plt.show()
-        for i in range(self.CLUSTERS):
-            colors[i][0] = int(colors[i][0])
-            colors[i][1] = int(colors[i][1])
-            colors[i][2] = int(colors[i][2])
-
-        # Blue mask 제거
-        fil = [colors[i][2] < 250 and colors[i][0] > 10 for i in range(self.CLUSTERS)]
-        colors = list(compress(colors, fil))
+        plt.figure()
+        plt.axis("off")
+        plt.imshow(chart)
+        plt.show()
 
         return colors
