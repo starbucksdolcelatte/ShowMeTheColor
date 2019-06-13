@@ -1,5 +1,6 @@
 # Show me the color
-Personal color diagnosis
+This is Personal color diagnosis system.
+<iframe width="560" height="315" src="https://www.youtube.com/embed/K7esg_dXYGo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## 1. Face detection
 `detect_face.py` with `shape_predictor_68_face_landmarks.dat` has DetectFace class, and it provides face detection function, the exact face parts, and the coordinates of them. 
