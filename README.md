@@ -4,6 +4,14 @@ This is Personal color diagnosis system.
 [![Personal Color Diagnosis system](http://img.youtube.com/vi/K7esg_dXYGo/0.jpg)](http://www.youtube.com/watch?v=K7esg_dXYGo "Personal Color Diagnosis system")
 <br>**Click this image to see the Demo video!**
 
+## Usage
+`cd src`
+- Analysis a single image
+`python main.py --image IMAGEPATH`
+- Analysis multiple images in a directory
+`python main.py --dir DIRECTORYPATH`
+
+ 
 ## 1. Face detection
 `detect_face.py` with `shape_predictor_68_face_landmarks.dat` has DetectFace class, and it provides face detection function, the exact face parts, and the coordinates of them. We selected cheeks, eyes, eyebrows(instead of hair) for personal color analysis.
 
