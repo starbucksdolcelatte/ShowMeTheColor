@@ -6,9 +6,9 @@ This is Personal color diagnosis system.
 
 ## Usage
 `cd src`
-- Analysis a single image
+- Analysis a single image<br>
 `python main.py --image IMAGEPATH`
-- Analysis multiple images in a directory
+- Analysis multiple images in a directory<br>
 `python main.py --dir DIRECTORYPATH`
 
  
