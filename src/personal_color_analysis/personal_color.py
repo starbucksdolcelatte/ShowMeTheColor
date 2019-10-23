@@ -47,13 +47,13 @@ def analysis(imgpath):
     hsv_weight = [10, 1, 1]
     if(tone_analysis.is_warm(Lab_b, Lab_weight)):
         if(tone_analysis.is_spr(hsv_s, hsv_weight)):
-            tone = '봄웜톤'
+            tone = '봄웜톤(spring)'
         else:
-            tone = '가을웜톤'
+            tone = '가을웜톤(fall)'
     else:
         if(tone_analysis.is_smr(hsv_s, hsv_weight)):
-            tone = '여름쿨톤'
+            tone = '여름쿨톤(summer)'
         else:
-            tone = '겨울쿨톤'
+            tone = '겨울쿨톤(winter)'
     # Print Result
     print('{}의 퍼스널 컬러는 {}입니다.'.format(imgpath, tone))
