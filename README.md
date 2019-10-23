@@ -4,7 +4,7 @@ This is Personal color diagnosis system.
 [![Personal Color Diagnosis system](http://img.youtube.com/vi/K7esg_dXYGo/0.jpg)](http://www.youtube.com/watch?v=K7esg_dXYGo "Personal Color Diagnosis system")
 <br>**Click this image to see the Demo video!**
 ## Caution
-This source code only covers personal color diagnosis. It doesn't have web framework, white balance adjust, and virtual makeup code. It is because I only contributed the personal color diagnosis feature in this team project!
+This source code only covers personal color diagnosis. It doesn't have web framework, white balance adjust, and virtual makeup code. It is because I only contributed the personal color diagnosis feature in this team project!<br><br>
 이 소스코드는 퍼스널 컬러 진단 기능만 다룹니다. 데모에서 보여드린 것처럼 웹 프레임워크나 화이트 밸런스 조정 기능, 그리고 가상 메이크업 시뮬레이션 코드는 없습니다. 팀 프로젝트에서 제 파트가 아니었거든요!
 
 ## Usage
@@ -16,9 +16,10 @@ First of all, `git clone` to download the source code.
 - Analysis multiple images in a directory<br>
 `python main.py --dir DIRECTORYPATH`<br>
 
- You have to install `imutils` and `opencv`, `dlib` packages.
+ You have to install `imutils` and `opencv`, `dlib` packages.<br><br>
 
 먼저 `git clone` 을 통해 다운로드 받습니다.
+
 `cd src` 
 - 사진 한개의 퍼스널컬러 진단하기<br>
 `python main.py --image IMAGEPATH`
@@ -49,5 +50,5 @@ We classified several lipsticks as 4 personal colors by their colors and put the
 우리는 몇 가지 립스틱을 색상을 기준으로 4 가지 퍼스널 컬러로 분류하고 이름, 색상 코드 및 클래스를 데이터베이스에 넣었습니다. 입술 외곽선을 감지 한 후 점들을 연결하고 DB에서 선택한 색상을 넣습니다.
 
 ## 5. Web
-Django is used for web framework.
+Django is used for web framework.<br>
 웹 프레임워크로 장고를 사용했습니다.
