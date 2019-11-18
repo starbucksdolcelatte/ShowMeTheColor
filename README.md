@@ -37,24 +37,24 @@ First of all, `git clone` to download the source code.
 사용자가 웹사이트에 사진을 업로드하면 본 시스템이 사진을 분석하여 퍼스널 컬러 진단 결과 및 추천 화장품을 적용한 가상 메이크업 시뮬레이션을 사용자에게 제공하는 구조입니다.
 
 ### 퍼스널 컬러 진단 알고리즘
-![process](res/img/2-process.JPG){: width="50%" height="50%"){: .center}
+<img src="res/img/2-process.JPG" width="70%" height="70%">
 질의 사진의 뺨, 눈동자, 눈썹의 Lab b값을 계산했다면 웜톤 또는 쿨톤으로 분류합니다. 웜톤이라면 HSV S값을 이용해 봄 또는 가을로, 쿨톤이라면 HSV S값을 이용해 여름 또는 겨울로 분류합니다. 
 퍼스널컬러 분류 작업은 질의 사진의 색상과 기준 색상의 차이를 구한 후 피부, 눈썹, 눈동자별로 설정된 가중치를 곱하여 합한 값을 비교하여 이루어집니다. 합이 작은 계절이 질의 사진의 퍼스널컬러 결과로 도출됩니다.
 
 # 결과
-![result](res/img/3-result.JPG){: width="50%" height="50%"){: .center}
+<img src="res/img/3-result.JPG" width="70%" height="70%">
 퍼스널 컬러 진단 결과의 정확도는 전체 테스트 케이스 수 대비 본 시스템이 진단한 결과가 ground truth와 일치하는 데이터 수로 측정했습니다. 각 계절에 해당하는 연예인의 테스트케이스 사진을 1번부터 10번까지 나열하였으며, 해당 사진의 퍼스널 컬러 진단 결과를 사진 아래 표기하였습니다. 위와 같이 봄/가을 컬러 진단에 각각 70%, 90%로 높은 정확도를 보였지만 여름/겨울의 진단 결과는 50%에 그쳤습니다. 그러나 웜톤 또는 쿨톤을 구분하는 데에는 최소 70%에서 최대 100%에 이르는 높은 정확도를 보여줍니다. 그 이유는 웜톤과 쿨톤을 가르는 Lab 의 b값을 보면 웜톤/쿨톤이 비교적 명확히 구분되기 때문일 것입니다. 또한 HSV의 S값에 대하여 봄, 가을은 뚜렷한 차이를 보여주지만 여름과 겨울은 서로 구분이 명확히 되지 않기 때문이라 예상합니다. (아래 그림 참고)
-![Lab](res/img/3.1-lab.JPG){: width="50%" height="50%"){: .center}</br>
-![HSV](res/img/3.2-hsv.JPG){: width="50%" height="50%"){: .center}</br>
+<img src="res/img/3.1-lab.JPG" width="50%" height="50%"></br>
+<img src="res/img/3.2-hsv.JPG" width="50%" height="50%"></br>
 
 # 상세
 ## 1. Face detection
-![facedetection](res/img/4-face-detection.JPG){: width="50%" height="50%"){: .center}
+<img src="facedetection](res/img/4-face-detection.JPG){: width="50%" height="50%"){: .center}
 `detect_face.py` using `shape_predictor_68_face_landmarks.dat` has DetectFace class, and it provides face detection function, the exact face parts, and the coordinates of them. We selected cheeks, eyes, eyebrows(instead of hair) for personal color analysis.<br><br>
 `shape_predictor_68_face_landmarks.dat` 를 사용하는 `detect_face.py`에는 DetectFace 클래스가 있으며, 얼굴 감지 기능, 정확한 얼굴 부분 및 좌표를 제공합니다. 퍼스널컬러 분석을 위해 뺨, 눈, 눈썹 (머리카락 대신)을 선택했습니다.<br><br>
 
 ## 2. Extract the Dominant Color
-![dominantcolor](res/img/4-dominant-color.JPG){: width="50%" height="50%"){: .center}
+<img src="dominantcolor](res/img/4-dominant-color.JPG){: width="50%" height="50%"){: .center}
 `color_extract.py` has DominantColors class, and it provides the dominant colors by k-means clustering algorithm, with RGB values.<br>I adopted the source code from (https://buzzrobot.com/dominant-colors-in-an-image-using-k-means-clustering-3c7af4622036) and modified it.<br><br>
 `color_extract.py`에는 DominantColors 클래스가 있으며 RGB 값을 사용하여 k-means clustering 알고리즘으로 대표 색상을 제공합니다. (https://buzzrobot.com/dominant-colors-in-an-image-using-k-means-clustering-3c7af4622036)에서 얻은 소스 코드를 수정했습니다.<br><br>
 
