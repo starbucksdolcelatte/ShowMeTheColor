@@ -54,7 +54,7 @@ First of all, `git clone` to download the source code.
 `shape_predictor_68_face_landmarks.dat` 를 사용하는 `detect_face.py`에는 DetectFace 클래스가 있으며, 얼굴 감지 기능, 정확한 얼굴 부분 및 좌표를 제공합니다. 퍼스널컬러 분석을 위해 뺨, 눈, 눈썹 (머리카락 대신)을 선택했습니다.<br><br>
 
 ## 2. Extract the Dominant Color
-<img src="dominantcolor](res/img/4-dominant-color.JPG){: width="50%" height="50%"){: .center}
+<img src="dominantcolor](res/img/4-dominant-color.JPG" width="70%" height="70%">
 `color_extract.py` has DominantColors class, and it provides the dominant colors by k-means clustering algorithm, with RGB values.<br>I adopted the source code from (https://buzzrobot.com/dominant-colors-in-an-image-using-k-means-clustering-3c7af4622036) and modified it.<br><br>
 `color_extract.py`에는 DominantColors 클래스가 있으며 RGB 값을 사용하여 k-means clustering 알고리즘으로 대표 색상을 제공합니다. (https://buzzrobot.com/dominant-colors-in-an-image-using-k-means-clustering-3c7af4622036)에서 얻은 소스 코드를 수정했습니다.<br><br>
 
