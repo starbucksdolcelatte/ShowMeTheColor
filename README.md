@@ -48,6 +48,7 @@ First of all, `git clone` to download the source code.
 
 # 상세
 ## 1. Face detection
+![facedetection](res/img/4-face-detection.JPG)
 `detect_face.py` using `shape_predictor_68_face_landmarks.dat` has DetectFace class, and it provides face detection function, the exact face parts, and the coordinates of them. We selected cheeks, eyes, eyebrows(instead of hair) for personal color analysis.<br><br>
 `shape_predictor_68_face_landmarks.dat` 를 사용하는 `detect_face.py`에는 DetectFace 클래스가 있으며, 얼굴 감지 기능, 정확한 얼굴 부분 및 좌표를 제공합니다. 퍼스널컬러 분석을 위해 뺨, 눈, 눈썹 (머리카락 대신)을 선택했습니다.<br><br>
 
