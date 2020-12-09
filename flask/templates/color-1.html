@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Cool tone">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>color 1</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='nicepage.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='color-1.css') }}" media="screen">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{{ url_for('static', filename='nicepage.js') }}" defer=""></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <meta name="generator" content="Nicepage 3.0.9, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i">
+    
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "",
+		"url": "{{ url_for('static', filename='index.html') }}",
+		"logo": "{{ url_for('static', filename='images/logo.png') }}"
+}</script>
+    <meta property="og:title" content="color 1">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#478ac9">
+    <link rel="canonical" href="{{ url_for('static', filename='index.html') }}">
+    <meta property="og:url" content="{{ url_for('static', filename='index.html') }}">
+  </head>
+  <body class="u-body u-overlap u-palette-1-base"><header class="u-align-right u-clearfix u-header u-sticky" id="sec-dbe3"><div class="u-clearfix u-sheet u-valign-bottom-xl u-valign-top-md u-valign-top-sm u-valign-top-xs u-sheet-1">
+        <a href="https://find-your-color.ml/" class="u-image u-logo u-image-1" title="Personal Color">
+          <img src="{{ url_for('static', filename='images/logo.png') }}" class="u-logo-image u-logo-image-1" data-image-width="198.857">
+        </a>
+      </div></header>
+    
+    <section class="u-clearfix u-image u-shading u-section-1" id="carousel_2ae0">
+      <style type='text/css'>
+        #carousel_2ae0
+        {
+          background-image: url("{{ url_for('static',filename = 'images/main.png')}}");
+        }
+        </style>
+      <div class="u-clearfix u-sheet u-valign-top-xs u-sheet-1">
+        <div class="u-align-center u-border-6 u-border-white u-container-style u-expanded-width-xs u-group u-opacity u-opacity-15 u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h6 class="u-custom-font u-text u-text-font u-text-1">TEST YOUR PERSONAL COLOR</h6>
+            <h1 class="u-custom-font u-font-playfair-display u-text u-title u-text-2"><b>Personal Color</b>
+              <br>with openCV test
+            </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-gradient u-section-2" id="sec-2a2c">
+      <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </section>
+    <section class="u-black u-clearfix u-section-3" id="sec-b2d8">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-align-center u-heading-font u-text u-text-default u-title u-text-1">openCV&nbsp;<br>이미지 분석
+        </h1>
+        <h5 class="u-align-center u-text u-text-default u-text-2">openCV를 이용하여 사용자 이미지로부터 평균 색상을 추출하고<br>분석하여 퍼스널 컬러를 알려줍니다.
+        </h5>
+        <h5 class="u-align-center u-text u-text-default u-text-3">이미지 업로드 시 유의사항</h5>
+        <ul class="u-align-left u-text u-text-4">
+          <li>왼쪽 피부 사진만 올려주세요</li>
+          <li>최대한 사진 안에 피부색만 나오도록 해주세요</li>
+          <li>조명의 영향을 줄이기 위해 최대한 자연조명 밑에서 찍어주세요</li>
+        </ul>
+      </div>
+    </section>
+    <form action="" method="post"  enctype="multipart/form-data">
+      <center>
+        <p>
+          <div class="filebox"> 
+            <label for="ex_file">업로드</label> 
+            <input type="file" name="img-path" id="ex_file">
+          </div>
+        </p>
+        <p>
+          <button class="btn btn-primary btn-lg" type='submit'>Start Test</button>
+
+        </p>
+  
+      </center>
+  </form>
+    
+    <footer class="u-align-left u-black u-clearfix u-footer u-footer" id="sec-ed9b"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <blockquote class="u-align-center u-text u-text-default u-text-1">2020-2 Opensource Programming<br>Lee Su Bin &amp; Jo Sue Yeon
+        </blockquote>
+      </div></footer>
+  </body>
+</html>

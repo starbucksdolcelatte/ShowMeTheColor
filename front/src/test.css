@@ -1,0 +1,121 @@
+        body
+        {
+            color:rgb(230, 255, 255);
+            width: auto;
+            height: auto;
+            padding: auto;
+            border: auto;
+        }
+        span
+        {
+            border: 1px;
+            color:rgb(255, 255, 255);
+            padding: 15px;
+            align-items: center;
+            text-align: center; 
+            font-size: 40px;
+            background-color: rgba(255, 255, 255, 0);
+            font-family: "Q";
+            top: 30px;
+        }
+        #result
+        {
+            border: none;
+            border-radius: 45px;
+            width: 140px;
+            height: 45px;
+            color:rgb(0, 0, 0);
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+            font-family: 'result', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 1000;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0);
+        }
+        #next
+        {
+            border: none;
+            border-radius: 45px;
+            width: 140px;
+            height: 45px;
+            color:rgb(0, 0, 0);
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+            font-family: 'result', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 1000;
+            box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease 0s;
+            cursor: pointer;
+            outline: none;
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0); 
+        }
+        #result:hover 
+        {
+            background-color: hsl(253, 100%, 16%);
+            box-shadow: 0px 15px 20px #2f016466;
+            color: #fff;
+            transform: translateY(-7px);
+          }
+        #question-count
+        {
+            font-size: 50px;
+        }
+        #question-text
+        {
+            font-size: 70px;
+        }
+        #test
+        {
+            height: 100vh;
+            background-image : url("https://source.unsplash.com/random/1920x1080/?color");
+            background-size : cover;
+            background-repeat : no-repeat;
+            padding: 12%;
+            text-align: center;
+            line-height: 100px;
+            font-family: "Q";
+        }
+        @font-face 
+        {
+            font-family: "title";
+            src: url("Christmas Time Personal Use.ttf");
+        }
+        @font-face 
+        {
+            font-family: "button";
+            src: url("Monday Monkey.ttf");
+        }
+        @font-face 
+        {
+            font-family: "Q";
+            src: url("po.ttf");
+        }
+        @font-face 
+        {
+            font-family: "result";
+            src: url("YummyCupcakes.ttf");
+        }
+        #btn_answer
+        {
+            border: 1px;
+            color:rgb(255, 255, 255);
+            padding: 10px;
+            justify-content: center;
+            align-items: center;
+            text-align: center; 
+            font-size: 40px;
+            background-color: rgba(255, 255, 255, 0);
+            font-family: "Q";
+            top: 30px;
+        }

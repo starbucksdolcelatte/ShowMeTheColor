@@ -1,0 +1,29 @@
+       body 
+       {
+           background-image : url('./main.png');
+           background-repeat : no-repeat;
+           background-size : cover;
+       }
+       #season_class
+        {
+            text-align: center;
+            width: auto;
+            height: auto;
+            padding: auto;
+            border: auto;
+        }
+        .img
+        {
+            max-width:100%;
+            height:auto; 
+        }
+        @font-face 
+        {
+            font-family: "title";
+            src: url("Christmas Time Personal Use.ttf");
+        }
+        @font-face 
+        {
+            font-family: "button";
+            src: url("Monday Monkey.ttf");
+        }

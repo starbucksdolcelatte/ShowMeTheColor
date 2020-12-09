@@ -1,0 +1,20 @@
+.snow-container{
+    display: flex;
+    justify-content: space-between;
+  }
+  .snow-flake {
+    color: rgb(255, 255, 255);
+    animation: fall 2.5s linear infinite; 
+  }
+  @keyframes fall {
+
+    0% { opacity: 1;color: #ff7777; }
+    15% { opacity: 0.9;color: #ffa166; }
+    30% { opacity: 0.9;color: #ffd96f }
+    45% { opacity: 0.9;color: #8cff7d; }
+    60% { opacity: 0.9;color: #7cb7ff; }
+    75% { opacity: 0.9;color: #7d7dff; }
+    90% { opacity: 0.9;color: #a781ff; }
+    100% {  transform: translate(0, 200px);
+        opacity: 0.3;color: #f280ff; }
+  }
