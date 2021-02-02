@@ -46,3 +46,5 @@ scikit_learn == 0.24.0
 # C:\Users\piay8\ShowMeTheColor\src\not_for_use\analysis.ipynb: 146
 # C:\Users\piay8\ShowMeTheColor\src\personal_color_analysis\tone_analysis.py: 1
 scipy == 1.6.0
+
+scikit-image == 0.18.0
