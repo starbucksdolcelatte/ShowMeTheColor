@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
-from personal_color_analysis import tone_analysis
-from personal_color_analysis.detect_face import DetectFace
-from personal_color_analysis.color_extract import DominantColors
+import tone_analysis
+from detect_face import DetectFace
+from color_extract import DominantColors
 from colormath.color_objects import LabColor, sRGBColor, HSVColor
 from colormath.color_conversions import convert_color
 
