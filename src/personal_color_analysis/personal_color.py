@@ -21,9 +21,11 @@ def analysis(imgpath):
     temp = []
     clusters = 4
     for f in face:
+        if len(f) == 0:
+            return
         dc = DominantColors(f, clusters)
         face_part_color, _ = dc.getHistogram()
-        #dc.plotHistogram()
+        # dc.plotHistogram()
         temp.append(np.array(face_part_color[0]))
     cheek = np.mean([temp[0], temp[1]], axis=0)
     eyebrow = np.mean([temp[2], temp[3]], axis=0)
