@@ -11,7 +11,7 @@ class DetectFace:
         # initialize dlib's face detector (HOG-based)
         # and then create the facial landmark predictor
         self.detector = dlib.get_frontal_face_detector()
-        self.predictor = dlib.shape_predictor('../res/shape_predictor_68_face_landmarks.dat')
+        self.predictor = dlib.shape_predictor('./res/shape_predictor_68_face_landmarks.dat')
 
         #face detection part
         self.img = cv2.imread(image)
@@ -32,9 +32,13 @@ class DetectFace:
 
     # return type : np.array
     def detect_face_part(self):
-        face_parts = [[],[],[],[],[],[],[]]
+        face_parts = []
         # detect faces in the grayscale image
-        rect = self.detector(cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY), 1)[0]
+        rect = self.detector(cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY), 1)
+
+        if not rect:
+            return
+        rect = rect[0]
 
         # determine the facial landmarks for the face region, then
         # convert the landmark (x, y)-coordinates to a NumPy array
@@ -44,7 +48,9 @@ class DetectFace:
         idx = 0
         # loop over the face parts individually
         for (name, (i, j)) in face_utils.FACIAL_LANDMARKS_IDXS.items():
-            face_parts[idx] = shape[i:j]
+            if i > j or len(shape) < j:
+                continue
+            face_parts.append(shape[i:j])
             idx += 1
         face_parts = face_parts[1:5]
         # set the variables
